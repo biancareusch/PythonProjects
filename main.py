@@ -1,16 +1,28 @@
-# This is a sample Python script.
+import netCDF4 as nc
+import numpy as np
+import scipy.io as sio
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# a wrfout file
+fn = '/home/chang-hsin/plumes/nbl.air.h2.5/wrfout/wrfout_d01_0001-01-01_00:35:00'
+# import the file to python
+ds = nc.Dataset(fn)
 
+# print(ds)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# print(ds.variables)
 
+# print the information
+print(ds.variables['U'])
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# u1=ds['U'][:]
+# print(u1.shape)
+u1 = ds['U'][0:2, 0, 0, 0]
+print(u1)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# type(u1)
+# print(u1[1:5,1,1,1])
+
+# arr = np.arrange(9) # 1d array of 9 numbers
+# arr = arr.reshape((3, 3))  # 2d array of 3x3
+
+# sio.savemat('/home/chang-hsin/plumes/temp.mat', mdict={'u1': u1})
